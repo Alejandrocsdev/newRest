@@ -1,6 +1,8 @@
+const { restaurant: restaurantService } = require('../services')
+
 module.exports = {
   read: (req, res) => {
     const id = req.params.id
-    res.send(`Read restaurant: ${id}`)
+    res.render('restaurant', { restaurant: restaurantService.getRestaurantById(id) })
   }
 }

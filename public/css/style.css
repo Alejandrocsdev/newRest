@@ -50,7 +50,7 @@ main {
   border: 2px solid #353535;
 }
 
-/* index.hbs */
+/* home.hbs */
 .searchbar {
   height: 50px;
   margin-bottom: 20px;
@@ -127,4 +127,22 @@ main {
 
 .restaurant-data>p {
   margin: 0;
+}
+
+/* restaurant.hbs */
+.map-link {
+  color: #9b2226;
+}
+
+.detail-img {
+  text-align: center;
+}
+
+.detail-img>img {
+  height: 300px;
+}
+
+td:first-child {
+  text-align: center;
+  text-wrap: nowrap;
 }
