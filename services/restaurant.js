@@ -1,10 +1,6 @@
-const restaurantModel = require('../models')
+const { restaurant: restaurantModel } = require('../models')
 
 module.exports = {
-  getAllRestaurants: () => {
-    return restaurantModel.getAll()
-  },
-  getRestaurantById: (id) => {
-    return restaurantModel.getById(id)
-  }
+  getAllRestaurants: () => restaurantModel.getAll(),
+  getRestaurantById: (id) => restaurantModel.getById(id)
 }

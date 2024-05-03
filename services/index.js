@@ -1,5 +1,5 @@
-const restaurantService = require('./restaurant')
+const restaurant = require('./restaurant')
 
 module.exports = {
-  restaurant: restaurantService
+  restaurant
 }
