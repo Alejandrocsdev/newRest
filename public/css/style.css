@@ -44,7 +44,7 @@ header {
 main {
   width: 1000px;
   padding: 20px;
-  margin: calc(var(--header-height) + 20px) auto 0 auto;
+  margin: calc(var(--header-height) + 20px) auto 20px auto;
   background-color: #ddb892;
   border-radius: 16px;
   border: 2px solid #353535;
