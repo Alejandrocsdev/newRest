@@ -1,11 +1,32 @@
 const { restaurant: restaurantService } = require('../services')
 
 module.exports = {
-  list: (req, res) => {
-    res.render('home', { restaurants: restaurantService.getAllRestaurants() })
+  list: async (req, res) => {
+    try {
+      const restaurants = await restaurantService.getAll()
+      res.render('home', { restaurants })
+    } catch (err) {
+      console.error('Error:', err)
+      res.status(500).send('Internal Server Error')
+    }
   },
-  match: (req, res) => {
-    const keyword = req.query.search?.trim()
-    res.render('home', { restaurants: restaurantService.getMatchedRestaurants(keyword), keyword })
+  match: async (req, res) => {
+    try {
+      const keyword = req.query.search?.trim()
+      const restaurants = await restaurantService.getAll()
+      const matched = keyword
+        ? restaurants.filter((restaurant) =>
+            Object.values(restaurant).some((property) => {
+              if (typeof property === 'string') {
+                return property.toLowerCase().includes(keyword.toLowerCase())
+              }
+            })
+          )
+        : restaurants
+      res.render('home', { restaurants: matched, keyword })
+    } catch (err) {
+      console.error('Error:', err)
+      res.status(500).send('Internal Server Error')
+    }
   }
 }

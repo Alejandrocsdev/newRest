@@ -1,9 +1,19 @@
 const { restaurant: restaurantService } = require('../services')
 
 module.exports = {
-  readDetail: (req, res) => {
-    const id = req.params.id
-    res.render('restaurant', { restaurant: restaurantService.getRestaurantById(id) })
+  readDetail: async (req, res) => {
+    try {
+      const id = req.params.id
+      const restaurant = await restaurantService.getById(id)
+      if (!restaurant) {
+        res.status(404).send('Restaurant not found')
+        return
+      }
+      res.render('restaurant', { restaurant })
+    } catch (err) {
+      console.error('Error:', err)
+      res.status(500).send('Internal Server Error')
+    }
   },
   readCreate: (req, res) => {
     res.send('read CREATE restaurant page')
