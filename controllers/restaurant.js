@@ -16,13 +16,37 @@ module.exports = {
     }
   },
   readCreate: (req, res) => {
-    res.send('read CREATE restaurant page')
+    try {
+      res.render('create')
+    } catch (err) {
+      console.error('Error:', err)
+      res.status(500).send('Internal Server Error')
+    }
   },
   readEdit: (req, res) => {
     res.send('read EDIT restaurant page')
   },
-  create: (req, res) => {
-    res.send('create restaurant')
+  create: async (req, res) => {
+    try {
+      console.log(req.body)
+      const { name, name_en, category, image, location, phone, google_map, rating, description } =
+        req.body
+      await restaurantService.create({
+        name,
+        name_en,
+        category,
+        image,
+        location,
+        phone,
+        google_map,
+        rating,
+        description
+      })
+      res.redirect('/home')
+    } catch (err) {
+      console.error('Error:', err)
+      res.status(500).send('Internal Server Error')
+    }
   },
   update: (req, res) => {
     res.send('update restaurant')

@@ -16,5 +16,6 @@ const attributes = [
 
 module.exports = {
   getAll: () => Rest.findAll({ attributes, raw: true }),
-  getById: (id) => Rest.findByPk(id, { attributes, raw: true })
+  getById: (id) => Rest.findByPk(id, { attributes, raw: true }),
+  create: (body) => Rest.create(body)
 }

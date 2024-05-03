@@ -13,6 +13,7 @@ module.exports = {
   match: async (req, res) => {
     try {
       const keyword = req.query.search?.trim()
+      const create = true
       const restaurants = await restaurantService.getAll()
       const matched = keyword
         ? restaurants.filter((restaurant) =>
@@ -23,7 +24,7 @@ module.exports = {
             })
           )
         : restaurants
-      res.render('home', { restaurants: matched, keyword })
+      res.render('home', { restaurants: matched, keyword, create })
     } catch (err) {
       console.error('Error:', err)
       res.status(500).send('Internal Server Error')

@@ -8,12 +8,6 @@ const app = express()
 // Setting the port number
 const port = 3000
 
-// Importing the router module from ./routes
-const router = require('./routes')
-
-// Using the router for all routes
-app.use('/', router)
-
 // Setting up the Handlebars view engine
 app.engine('.hbs', engine({ extname: '.hbs' }))
 app.set('view engine', '.hbs')
@@ -21,6 +15,15 @@ app.set('views', './views')
 
 // Serving static files from the public directory
 app.use(express.static('public'))
+
+// app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// Importing the router module from ./routes
+const router = require('./routes')
+
+// Using the router for all routes
+app.use('/', router)
 
 // Starting the server and listening on the specified port
 app.listen(port, () => {
